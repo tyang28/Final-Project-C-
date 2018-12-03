@@ -1,6 +1,6 @@
 #ifndef _CARD_H
 #define _CARD_H
-
+#include <string>
 /*************************************
 For SkipBo - Fall 2018 - EN.601.220
 Instructor provided code

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Card.h"
 
+
 class Pile {
  protected:
   std::vector<Card> pile;
@@ -21,6 +22,8 @@ class Pile {
   void readIn(std::istream & is);  // students to write this, companion to toString()
 
   virtual void display() const = 0;  // for live game play, must override
+
+  Card remove();
 };
 
 
