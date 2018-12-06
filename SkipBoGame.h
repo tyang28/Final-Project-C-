@@ -57,8 +57,6 @@ public:
 
     ~SkipBoGame();
 
-    void addDrawPile(Card c);
-
     void setPlayers(int numPlayer);
 
     void dealCard(int stockSize);

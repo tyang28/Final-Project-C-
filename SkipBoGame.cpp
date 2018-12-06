@@ -95,45 +95,51 @@ int SkipBoGame::promptPlayerMove(int curp){
   char to;
   cout << "(m)ove [start] [end] or (d)raw ?";
   cin >> mode;
-  cin >> place1;
-  cin >> place2; 
+
   
-
-
-      if (mode.size() == 1){
-        way = mode.at(0);
-      }else{
-        cout << "illegal command, try again" << endl;
-        return 1;
-      }
-      
-      if(place1.size() == 1){
-        from = place1.at(0);
-      }else{
-        cout << "illegal command, try again" << endl;
-        return 1;
-      }
-
-      if(place2.size() == 1){
-        to = place2.at(0);
-      }else{
-        cout << "illegal command, try again" << endl;
-        return 1;
-      }
-  
-
-
-  // not m or d
+  if (mode.size() == 1){
+    way = mode.at(0);
+  }else{
+    cout << "illegal command, try again" << endl;
+    return 1;
+  }
+    // not m or d
   if (way == 'd'){//draw a new card 
-    if(peep[curp % nump].hand.size() == 0){
+    cout << "I am here" << endl;
+    cout << "curp: " << this->curp << endl;
+    cout << "index: " << this->curp % this->nump << endl;
+    cout << "size is" << peep[curp % nump].hand.size() << endl;
+    if(peep[curp % nump].hand.size() != 0){
       cout << "illegal command, try again" << endl;
       return 1;
     }else{
       while(peep[curp % nump].hand.size() != 5){
         peep[curp % nump].hand.addCard(draw.remove());
       }
-    }
+      return 0;
+  }
+
+
+
+
+
   }else if (way == 'm'){//move from hand 
+    cin >> place1;
+    cin >> place2;  
+    if(place1.size() == 1){
+      from = place1.at(0);
+    }else{
+      cout << "illegal command, try again" << endl;
+      return 1;
+    }
+
+    if(place2.size() == 1){
+      to = place2.at(0);
+    }else{
+      cout << "illegal command, try again" << endl;
+      return 1;
+    }
+  
     if(validMove(from,to)){
       if(from == '0'){
         //add from stock to build
@@ -177,7 +183,6 @@ int SkipBoGame::promptPlayerMove(int curp){
       cout << "illegal command, try again" << endl;
       return 1;
     }
-
   }else{
     cout << "illegal command, try again" << endl;
     return 1;
@@ -267,14 +272,15 @@ bool SkipBoGame::validMove(char place1, char place2){
           return false;
         }
       }else if (place2 >= '1' && place2 <= '4'){//move to discard Pile
-        int index3 = place2 - '1';
-        if(currentHand.getCard(index1).getValue() == 0){
-          return true;
-        }else if(currentHand.getCard(index1).getValue() == currentDiscard[index3].size() + 1){
-          return true;
-        }else{
-          return false;
-        }
+        return true;
+        // int index3 = place2 - '1';
+        // if(currentHand.getCard(index1).getValue() == 0){
+        //   return true;
+        // }else if(currentHand.getCard(index1).getValue() == currentDiscard[index3].size() + 1){
+        //   return true;
+        // }else{
+        //   return false;
+        // }
       }
     }
   }
@@ -297,7 +303,7 @@ void SkipBoGame::play(){
   string input; 
   char mode;
   cout << ">>" << current.name << " turn next" << endl; 
-  cout << "(p)lay, (s)ave, or (q)uit ?" << endl;
+  cout << "(p)lay, (s)ave, or (q)uit ?";
   cin >> input;
 
   if(input.size() == 1){
@@ -317,15 +323,22 @@ void SkipBoGame::play(){
       fillHand(curp);
       display();
       while (promptPlayerMove(curp) != 2){
-        promptPlayerMove(curp);
+        cout << endl;
+        //promptPlayerMove(curp);
+        //cout << peep[curp % peep.size()].stock.size() << endl;
         display();
+        //cout << gameOver() << endl;
+        if(gameOver()){
+          cout << "GAME OVER - " << current.name << " wins!" << endl;
+          return;
+        }
       }
       curp ++;
-      display();
+      //display();
     }else{
       cout << "illegal command, try again" << endl;
     }
-    display();
+    //display();
     current = peep[curp % nump];
     cout << ">> " << current.name << " turn next" << endl;
     cout << "(p)lay, (s)ave, or (q)uit ?";
@@ -361,10 +374,10 @@ void SkipBoGame::play(){
   // if(mode == 's'){
   //   return;
   // }
-  if(gameOver()) {
-    cout << "GAME OVER - " << current.name << " wins!" << endl;
-    return;
-  }
+  // if(gameOver()) {
+  //   cout << "GAME OVER - " << current.name << " wins!" << endl;
+  //   return;
+  // }
 
 
 }
@@ -418,7 +431,3 @@ std::string SkipBoGame::toString() const {
   return result.str();
 }
 
-
-void SkipBoGame::addDrawPile(Card c){
-  this->draw.addCard(c);
-}
