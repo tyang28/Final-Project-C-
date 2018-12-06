@@ -7,6 +7,7 @@
 #include "Card.h"
 //#include "Player.h"
 #include "DrawPile.h"
+#include "SkipBoGame.h"
 
 using std::cin;
 using std::string;
@@ -58,15 +59,20 @@ int main(int argc, char* argv[]) {
         cout << "invalid program usage: can't open deck file" << endl;
         return 1;
       }
-      DrawPile draw = DrawPile();
+
+      SkipBoGame SBgame(numPlayer);
+      SBgame.draw.rand = shuffle;
       int number;
       while(file >> number){
         Card c(number);
-        draw.addCard(c);
+        SBgame.draw.addCard(c);
       }
       if (shuffle) {
-        draw.shuffle();
+        SBgame.draw.shuffle();
       }
+      SBgame.setPlayers(numPlayer);
+      SBgame.dealCard(stockSize);
+      SBgame.play();
       return 0;
     } 
     default:

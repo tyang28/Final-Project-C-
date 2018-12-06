@@ -17,8 +17,15 @@ void Hand::display() const {
     std::cout << "--  ";
 }
 
-Card * Hand::getCard(int i) const{
-  Card * c = new Card();
-  c = &pile[i];
+Card Hand::getCard(int i) const{
+  Card c = Card();
+  c = pile[i];
+  return c;
+}
+
+Card Hand::removeHand(int i) {
+  Card c = Card();
+  c = pile[i];
+  pile.erase(pile.begin() + i);
   return c;
 }

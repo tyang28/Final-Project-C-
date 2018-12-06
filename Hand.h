@@ -14,7 +14,9 @@ class Hand: public Pile {
 
     virtual void display() const;
 
-    Card * getCard(int i) const;
+    Card getCard(int i) const;
+
+    Card removeHand(int i);
 };
 
 

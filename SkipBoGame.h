@@ -15,17 +15,21 @@
 
 #include "Card.h"
 #include "Player.h"
-
+#include "BuildPile.h"
+#include "DrawPile.h"
+#include "PlayPile.h"
 
 
 class SkipBoGame {
 private:
-    std::vector<Player> players;
-    DrawPile draw;
-    int turn;
-    BuildPile build[4];
-    DrawPile bufferPile;
+    std::vector<Player> peep;
 
+    int nump;
+
+    int curp;
+
+    BuildPile build[4];
+    
     void addPlayer(Player*);
 
     bool gameOver();
@@ -37,25 +41,41 @@ private:
     void addInDrawPile(int);
 
 public:
-    SkipBoGame(){}
+    DrawPile draw;
 
-    SkipBoGame(std::ifstream &inFile);
+    DrawPile bufferPile;
+
+    SkipBoGame(int numPlayer);
+
+    void clearBuild();
+
+    bool drawEmpty();
+
+    void fillDraw();
+
+    //SkipBoGame(std::ifstream &inFile);
 
     ~SkipBoGame();
 
-    bool setPlayers(int numPlayer);
+    void addDrawPile(Card c);
+
+    void setPlayers(int numPlayer);
 
     void dealCard(int stockSize);
 
     bool validMove(char place1, char place2);
 
-    void promptPlayerMove(int turn);
+    int promptPlayerMove(int turn);
     
     void play();
 
     void display() const;
 
     std::string toString() const;
+
+    void fillHand(int curp);
+
+    void clearBuild(int index);
 };
 
 

@@ -18,9 +18,8 @@ std::string Pile::toString() const {
   return result;
 }
 
-Card  * Pile::remove() {
-  Card *c = new Card();
-  c = &pile.back();
+Card  Pile::remove() {
+  Card c = pile.back();
   pile.pop_back();
   return c;
 }

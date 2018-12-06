@@ -10,3 +10,7 @@ void DrawPile::display() const {
 void DrawPile::shuffle() {
     std::random_shuffle(this->pile.begin(), this->pile.end());
 }
+
+bool DrawPile::getRand() const{
+  return rand;
+}
