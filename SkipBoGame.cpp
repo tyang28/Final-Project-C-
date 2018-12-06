@@ -31,7 +31,7 @@ SkipBoGame::~SkipBoGame(){
 
 void SkipBoGame::setPlayers(int numPlayer){
     for (int i = 0; i < numPlayer; i++){
-      string playerName = "Player " + std::to_string(i);
+      string playerName = "Player" + std::to_string(i);
       Player tempPlayer = Player(playerName);
       this->peep.push_back(tempPlayer);
     }
@@ -302,7 +302,8 @@ void SkipBoGame::play(){
   Player current = peep [curp % nump];
   string input; 
   char mode;
-  cout << ">>" << current.name << " turn next" << endl; 
+  cout << endl;
+  cout << " >> " << current.name << " turn next" << endl; 
   cout << "(p)lay, (s)ave, or (q)uit ?";
   cin >> input;
 
@@ -329,10 +330,12 @@ void SkipBoGame::play(){
         display();
         //cout << gameOver() << endl;
         if(gameOver()){
-          cout << "GAME OVER - " << current.name << " wins!" << endl;
+          cout << endl;
+          cout << "GAME OVER - " << current.name << " wins!";
           return;
         }
       }
+      display();
       curp ++;
       //display();
     }else{
@@ -340,7 +343,8 @@ void SkipBoGame::play(){
     }
     //display();
     current = peep[curp % nump];
-    cout << ">> " << current.name << " turn next" << endl;
+    cout << endl;
+    cout << " >> " << current.name << " turn next" << endl;
     cout << "(p)lay, (s)ave, or (q)uit ?";
     cin >> input;
     if(input.size() == 1){
