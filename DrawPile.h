@@ -12,7 +12,7 @@ class DrawPile : public Pile {
   DrawPile() {};
   virtual void display() const;
   void shuffle();
-  bool getRand() const;
+  std::string getRand() const;
   bool rand;
 };
 

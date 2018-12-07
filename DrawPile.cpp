@@ -11,6 +11,9 @@ void DrawPile::shuffle() {
     std::random_shuffle(this->pile.begin(), this->pile.end());
 }
 
-bool DrawPile::getRand() const{
-  return rand;
+std::string DrawPile::getRand() const{
+  if (rand == 0) {
+    return "false";
+  }
+  return "true";
 }

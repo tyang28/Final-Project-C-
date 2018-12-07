@@ -15,6 +15,7 @@ class Player {
     Player(std::string n){name = n;};
     void display() const;
     std::string toString() const;
+    void readIn(std::istream & is);
 };
 
 #endif

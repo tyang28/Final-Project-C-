@@ -36,8 +36,6 @@ private:
 
     void getHand(int);
 
-    //void createDisplay();
-
     void addInDrawPile(int);
 
 public:
@@ -53,7 +51,7 @@ public:
 
     void fillDraw();
 
-    //SkipBoGame(std::ifstream &inFile);
+    SkipBoGame(std::ifstream &inFile);
 
     ~SkipBoGame();
 
@@ -74,6 +72,10 @@ public:
     void fillHand(int curp);
 
     void clearBuild(int index);
+
+    void readIn(std::istream & is);
+
+    void saveGame(std::string filename);
 };
 
 

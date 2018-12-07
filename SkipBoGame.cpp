@@ -21,9 +21,9 @@ SkipBoGame::SkipBoGame(int numPlayer){
   this->nump = numPlayer;
 }
 
-// SkipBoGame(std::ifstream &inFile){
-  
-// }
+SkipBoGame::SkipBoGame(std::ifstream & inFile){
+  readIn(inFile);  
+}
 
 SkipBoGame::~SkipBoGame(){
 
@@ -314,9 +314,13 @@ void SkipBoGame::play(){
   }
 
   while (!gameOver()){
-    // if(mode == 's'){
-
-    // }else 
+    if(mode == 's'){
+      cout << "save filename: ";
+      string filename;
+      cin >> filename;
+      saveGame(filename);
+      return;
+    }else 
     if (mode == 'q'){
       cout << "thanks for playing" << endl;
       return;
@@ -435,3 +439,44 @@ std::string SkipBoGame::toString() const {
   return result.str();
 }
 
+void SkipBoGame::readIn(std::istream & is) {
+  string mode;
+  bool shuffmode;
+  is >> mode;
+  if(mode == "true") {
+    shuffmode = true;
+  }
+  else {
+    shuffmode = false;
+  }
+  is >> nump;
+  is >> curp;
+  for (int i = 0; i < nump; i++) {
+    string playerName = "Player" + std::to_string(i);
+    Player tempPlayer(playerName);
+    peep.push_back(tempPlayer);
+  }
+  draw = DrawPile();
+  //DrawPile buffer();
+  for (int i = 0; i < 4; i++) {
+    build[i] = BuildPile();
+  }
+  for(int i = curp; i < nump; i++) {
+    peep[i].readIn(is);
+  }
+  for(int a = 0; a < curp; a++) {
+    peep[a].readIn(is);
+  }
+  draw.readIn(is);
+  draw.rand = shuffmode;
+  for(int b = 0; b < 4; b++) {
+    build[b].readIn(is);
+  }
+}
+
+void SkipBoGame::saveGame(string filename) {
+  std::ofstream savefile;
+  savefile.open(filename);
+  savefile << toString();
+  savefile.close();
+}

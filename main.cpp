@@ -19,7 +19,33 @@ using std::stoi;
 int main(int argc, char* argv[]) {
   switch(argc){
     //check bool and number
-    case 3:
+    case 3: {
+      bool loadShuffle;
+      string FileName;
+      if (string(argv[1]).compare("true") == 0) {
+        loadShuffle = true;
+      } else if (string(argv[1]).compare("false") == 0) {
+        loadShuffle = false;
+      } else {
+        cout << "invalid program usage: invalid first argument" << endl;
+        return 1;
+      }
+
+      FileName = argv[2];
+      ifstream File;
+      File.open(FileName,ifstream::in);
+      if(!File.is_open()){
+        cout << "invalid program usage: can't open deck file" << endl;
+        return 1;
+      }
+
+      SkipBoGame SBgame(File);
+      if (loadShuffle) {
+        SBgame.draw.shuffle();
+      }
+      SBgame.play();
+      return 0;
+    }
 
     case 5:{
       bool shuffle;

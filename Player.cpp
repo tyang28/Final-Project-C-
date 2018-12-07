@@ -3,6 +3,7 @@
 #include <sstream>
 #include "Player.h"
 
+
 // for live game play - must not change!
 void Player::display() const {
   std::cout << "Current ";
@@ -46,4 +47,14 @@ std::string Player::toString() const {
     result << "Discard" << i << " " << discard[i].toString();
   }
   return result.str();
+}
+
+void Player::readIn(std::istream & is) {
+  std::string temp;
+  is >> name;
+  stock.readIn(is);
+  hand.readIn(is);
+  for(int i = 0; i < 4; i++) {
+    discard[i].readIn(is);
+  }
 }

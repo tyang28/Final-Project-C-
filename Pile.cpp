@@ -29,3 +29,18 @@ Card * Pile::top() {
   c = &pile.back();
   return c;
 }
+
+void Pile::readIn(std::istream & is) {
+  int num;
+  std::string temp;
+  is >> temp;
+  int size;
+  is >> size;
+  if(size > 0) {
+    for(int i = 0; i < size; i++) {
+      is >> num;
+      Card newCard(num);
+      addCard(newCard);
+    }
+  }
+}
