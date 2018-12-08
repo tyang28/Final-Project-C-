@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
       ifstream File;
       File.open(FileName,ifstream::in);
       if(!File.is_open()){
-        cout << "invalid program usage: can't open deck file" << endl;
+        cout << "invalid program usage: can't open input game file" << endl;
         return 1;
       }
 
@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
       }
 
       stockSize = stoi(argv[3]);
-      if(stockSize < 0 || (numPlayer == 6 && stockSize > 20)){
+      if(stockSize < 0 || (numPlayer == 6 && stockSize > 20) || ((numPlayer <= 5) && (numPlayer >= 2) && (stockSize > 30)) ){
         cout << "invalid program usage: bad stock size" << endl;
         return 1;
       }else {

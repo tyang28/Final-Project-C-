@@ -1,0 +1,59 @@
+commit 61a36239eedff896b6ad0ec8a7f6efb649fbd684
+Author: Yuxuan Chen <ychen349@ugradx.cs.jhu.edu>
+Date:   Fri Dec 7 20:44:22 2018 -0500
+
+    Makefile work
+
+commit 71c187f759c75dbedfa10c54559e04981f9f6fcf
+Author: Yuxuan Chen <ychen349@ugradx.cs.jhu.edu>
+Date:   Fri Dec 7 18:37:18 2018 -0500
+
+    save load added
+
+commit 4fc6bfcb5ecdb8b797933dd52adde45a5fb9c84f
+Author: Yuxuan Chen <ychen349@ugradx.cs.jhu.edu>
+Date:   Thu Dec 6 10:57:36 2018 -0500
+
+    delete unused files
+
+commit 2d61233701d67e4045ff9f6cde171434faceed66
+Author: Zixuan Wang <zwang191@jhu.edu>
+Date:   Thu Dec 6 10:53:10 2018 -0500
+
+    Fixed Space in SKipBoGame.cpp
+
+commit c6052f27d9ac9f68cc80162aa78d61768e203503
+Author: Zixuan Wang <zwang191@jhu.edu>
+Date:   Thu Dec 6 10:12:30 2018 -0500
+
+    Minor bug fixed in SkipBoGame.cpp
+
+commit 1dcb0010dd2392d3be98d3f1cfb15eaa4166789f
+Author: Zixuan Wang <zwang191@jhu.edu>
+Date:   Thu Dec 6 07:01:30 2018 -0500
+
+    Update SkipBoGame.cpp
+
+commit b889a8b00037e288343b0715424477aa0281e053
+Author: Zixuan Wang <zwang191@jhu.edu>
+Date:   Tue Dec 4 09:51:55 2018 -0500
+
+    Update all the files
+
+commit 9d339fbad94d57af9328104cb9bb1dd94b0a2bb3
+Author: Teng-Ju Yang <tyang28@jhu.edu>
+Date:   Sun Dec 2 22:12:40 2018 -0500
+
+    added necessary class files
+
+commit 3bf641a2b741751d0dd6a1e16695600f513e20c4
+Author: Teng-Ju Yang <tyang28@jhu.edu>
+Date:   Sun Dec 2 20:38:21 2018 -0500
+
+    added SkipBoGame.h
+
+commit 3c346af35dd796922cfc59bd8f64eba564889643
+Author: Teng-Ju Yang <tyang28@jhu.edu>
+Date:   Fri Nov 30 09:41:18 2018 -0500
+
+    commit source files

@@ -63,6 +63,8 @@ void SkipBoGame::clearBuild(int index){
       v.insert(v.begin(),build[index].remove());
     }
     bufferPile.addVector(v); 
+    char place = 'a' + index;
+    cout << "build pile " <<  place << " full, set aside" << endl;
   }
 }
 
@@ -90,7 +92,7 @@ int SkipBoGame::promptPlayerMove(int curp){
   char way;
   char from;
   char to;
-  cout << "(m)ove [start] [end] or (d)raw ?";
+  cout << "(m)ove [start] [end] or (d)raw ? ";
   cin >> mode;
 
   
@@ -276,7 +278,7 @@ void SkipBoGame::play(){
   char mode;
   cout << endl;
   cout << " >> " << current.name << " turn next" << endl; 
-  cout << "(p)lay, (s)ave, or (q)uit ?";
+  cout << "(p)lay, (s)ave, or (q)uit ? ";
   cin >> input;
 
   if(input.size() == 1){
@@ -300,14 +302,16 @@ void SkipBoGame::play(){
       fillHand(curp);
       display();
       while (promptPlayerMove(curp) != 2){
-        cout << endl;
-        display();
         if(gameOver()){
           cout << endl;
-          cout << "GAME OVER - " << current.name << " wins!";
+          cout << "GAME OVER - " << current.name << " wins! ";
+          cout << " ";
           return;
         }
+        cout << endl;
+        display();
       }
+      cout << endl;
       display();
       curp ++;
     }else{
@@ -316,7 +320,7 @@ void SkipBoGame::play(){
     current = peep[curp % nump];
     cout << endl;
     cout << " >> " << current.name << " turn next" << endl;
-    cout << "(p)lay, (s)ave, or (q)uit ?";
+    cout << "(p)lay, (s)ave, or (q)uit ? ";
     cin >> input;
     if(input.size() == 1){
         mode = input.at(0);
@@ -409,13 +413,11 @@ void SkipBoGame::readIn(std::istream & is) {
 }
 
 void SkipBoGame::saveGame(string filename) {
-  cout << bufferPile.size() << endl;
   if (bufferPile.size() > 0) {
     for (int i = bufferPile.size(); i > 0; i--) {
       draw.insertAt(bufferPile.remove());
     }
   }
-  cout << bufferPile.size() << endl;
   std::ofstream savefile;
   savefile.open(filename);
   savefile << toString();
