@@ -10,7 +10,7 @@ using std::endl;
 using std::string; 
 using std::vector; 
 
-
+//Default constructor for SkipBoGame
 SkipBoGame::SkipBoGame(int numPlayer){
   this->draw = DrawPile();
   this->bufferPile = DrawPile();
@@ -21,14 +21,17 @@ SkipBoGame::SkipBoGame(int numPlayer){
   this->nump = numPlayer;
 }
 
+//Non-Default constructor for SkipBoGame that takes in a save state as a paramter and reads it in
 SkipBoGame::SkipBoGame(std::ifstream & inFile){
   readIn(inFile);  
 }
 
+//destructor
 SkipBoGame::~SkipBoGame(){
 
 }
 
+//Set player information and save into player vector
 void SkipBoGame::setPlayers(int numPlayer){
     for (int i = 0; i < numPlayer; i++){
       string playerName = "Player" + std::to_string(i);
@@ -48,7 +51,7 @@ void SkipBoGame::dealCard(int stockSize){
 }
 
 
-
+//Fill a player's hand up to 5
 void SkipBoGame::fillHand(int curp){
   while(peep[curp%nump].hand.size() < 5){
     peep[curp%nump].hand.addCard(draw.remove());
@@ -56,6 +59,7 @@ void SkipBoGame::fillHand(int curp){
   }
 }
 
+//Move aside build pile after it is full
 void SkipBoGame::clearBuild(int index){
   if(build[index].size() == 12){
     vector<Card> v;
@@ -68,6 +72,7 @@ void SkipBoGame::clearBuild(int index){
   }
 }
 
+//Boolean to check if DrawPile is empty
 bool SkipBoGame::drawEmpty(){
   if(draw.size() == 0){
     return true;
@@ -76,6 +81,7 @@ bool SkipBoGame::drawEmpty(){
   }
 }
 
+//Fill pile from buffer pile
 void SkipBoGame::fillDraw(){
   if(drawEmpty()){
     while(bufferPile.size() != 0){
@@ -85,6 +91,7 @@ void SkipBoGame::fillDraw(){
   }
 }
 
+//Prompt and error Handling for gameplay
 int SkipBoGame::promptPlayerMove(int curp){
   string mode;
   string place1;
@@ -181,6 +188,7 @@ int SkipBoGame::promptPlayerMove(int curp){
   return 1;
 }
 
+//Check if move is valid
 bool SkipBoGame::validMove(char place1, char place2){
   //initialize all the piles 
   Player current = peep [curp % peep.size()];
@@ -261,6 +269,7 @@ bool SkipBoGame::validMove(char place1, char place2){
   return false;
 }
 
+//Check if there is a winner
 bool SkipBoGame::gameOver(){
   if(peep[curp % peep.size()].stock.size() == 0){
     return true;
@@ -269,6 +278,7 @@ bool SkipBoGame::gameOver(){
   }
 }
 
+//General gameplay prompt and error handling
 void SkipBoGame::play(){
 
   //wile i can scan in 3 strings                                                                                     
@@ -377,6 +387,7 @@ std::string SkipBoGame::toString() const {
   return result.str();
 }
 
+//Read In for reading in save state
 void SkipBoGame::readIn(std::istream & is) {
   string mode;
   bool shuffmode;
@@ -412,6 +423,7 @@ void SkipBoGame::readIn(std::istream & is) {
   }
 }
 
+//Save Game function
 void SkipBoGame::saveGame(string filename) {
   if (bufferPile.size() > 0) {
     for (int i = bufferPile.size(); i > 0; i--) {

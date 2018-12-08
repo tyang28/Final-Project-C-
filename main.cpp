@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
         cout << "invalid program usage: can't open input game file" << endl;
         return 1;
       }
-
+      //Load Game
       SkipBoGame SBgame(File);
       if (loadShuffle) {
         SBgame.draw.shuffle();
@@ -47,6 +47,7 @@ int main(int argc, char* argv[]) {
       return 0;
     }
 
+   
     case 5:{
       bool shuffle;
       int numPlayer;
@@ -63,6 +64,7 @@ int main(int argc, char* argv[]) {
       }
 
       numPlayer = stoi(argv[2]);
+      //Check if number of players fits rules
       if(numPlayer < 2 || numPlayer > 6){
         cout << "invalid program usage: num players must be 2-6" << endl;
         return 1;
@@ -71,6 +73,7 @@ int main(int argc, char* argv[]) {
       }
 
       stockSize = stoi(argv[3]);
+      //Check if stock size fits rules
       if(stockSize < 0 || (numPlayer == 6 && stockSize > 20) || ((numPlayer <= 5) && (numPlayer >= 2) && (stockSize > 30)) ){
         cout << "invalid program usage: bad stock size" << endl;
         return 1;
@@ -107,19 +110,3 @@ int main(int argc, char* argv[]) {
   }
 }
 
-// int main() {
-//   Player newp("abc");
-//   Card card1(1);
-//   Card card2(5);
-//   Card card3(2);
-//   Card card4(4);
-//   Card card5(3);
-//   Hand hand;
-//   hand.addCard(card1);
-//   hand.addCard(card2);
-//   hand.addCard(card3);
-//   hand.addCard(card4);
-//   hand.addCard(card5);
-//   hand.display();
-//   return 0;
-// }

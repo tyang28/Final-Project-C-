@@ -49,6 +49,7 @@ std::string Player::toString() const {
   return result.str();
 }
 
+//Function to read in from a file and save game information
 void Player::readIn(std::istream & is) {
   std::string temp;
   is >> name;

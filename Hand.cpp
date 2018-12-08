@@ -17,12 +17,14 @@ void Hand::display() const {
     std::cout << "--  ";
 }
 
+//Function to get card from a pile
 Card Hand::getCard(int i) const{
   Card c = Card();
   c = pile[i];
   return c;
 }
 
+//Function to remove hand
 Card Hand::removeHand(int i) {
   Card c = Card();
   c = pile[i];

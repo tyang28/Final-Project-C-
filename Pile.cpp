@@ -18,18 +18,21 @@ std::string Pile::toString() const {
   return result;
 }
 
+//Function to remove cards from a pile from the back
 Card  Pile::remove() {
   Card c = pile.back();
   pile.pop_back();
   return c;
 }
 
+//Function to return card at top of pile
 Card * Pile::top() {
   Card *c = new Card();
   c = &pile.back();
   return c;
 }
 
+//Function that is the opposite of toString to read in a save state for Pile
 void Pile::readIn(std::istream & is) {
   int num;
   std::string temp;
