@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "DrawPile.h"
 #include "Pile.h"
 
@@ -16,4 +17,16 @@ std::string DrawPile::getRand() const{
     return "false";
   }
   return "true";
+}
+
+Card DrawPile::removeFront() {
+  Card c = pile.front();
+  pile.erase(pile.begin());
+  return c;
+}
+
+void DrawPile::addVector(std::vector<Card> c) {
+  for (int i = 0; i < int(c.size()); i++) {
+    pile.push_back(c[i]);
+  }
 }

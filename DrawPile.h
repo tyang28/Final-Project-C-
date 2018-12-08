@@ -14,6 +14,9 @@ class DrawPile : public Pile {
   void shuffle();
   std::string getRand() const;
   bool rand;
+  void insertAt(const Card& c) {pile.insert(pile.begin(),c);}
+  Card removeFront();
+  void addVector(std::vector<Card> c);
 };
 
 

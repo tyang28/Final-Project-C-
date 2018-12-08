@@ -41,11 +41,6 @@ void SkipBoGame::setPlayers(int numPlayer){
 //initialize the game with palyers' stock 
 void SkipBoGame::dealCard(int stockSize){
   for (int i = 0; i < stockSize; i ++){
-    // //add cards to the players' hands
-    // for (int j = 0; j < 5; j ++){
-    //   peep[i].hand.addCard(draw.remove());
-    // }
-    //add cards to the stock
     for (int k = 0; k < nump; k++){
       peep[k].stock.addCard(draw.remove());
     }
@@ -63,9 +58,11 @@ void SkipBoGame::fillHand(int curp){
 
 void SkipBoGame::clearBuild(int index){
   if(build[index].size() == 12){
+    vector<Card> v;
     for (int i =0; i < 12; i ++){
-      bufferPile.addCard(build[index].remove());
+      v.insert(v.begin(),build[index].remove());
     }
+    bufferPile.addVector(v); 
   }
 }
 
@@ -105,10 +102,6 @@ int SkipBoGame::promptPlayerMove(int curp){
   }
     // not m or d
   if (way == 'd'){//draw a new card 
-    cout << "I am here" << endl;
-    cout << "curp: " << this->curp << endl;
-    cout << "index: " << this->curp % this->nump << endl;
-    cout << "size is" << peep[curp % nump].hand.size() << endl;
     if(peep[curp % nump].hand.size() != 0){
       cout << "illegal command, try again" << endl;
       return 1;
@@ -118,10 +111,6 @@ int SkipBoGame::promptPlayerMove(int curp){
       }
       return 0;
   }
-
-
-
-
 
   }else if (way == 'm'){//move from hand 
     cin >> place1;
@@ -204,12 +193,6 @@ bool SkipBoGame::validMove(char place1, char place2){
     currentBuild[i] = this->build[i];
   }
 
-  
-  // if(currentStock.size() == 0){
-  //   cout << "This player win the game" << endl;
-  // }
-
-
   //Move card from Stock Pile 
   if(place1 == '0'){
     //destination is Build Pile
@@ -226,7 +209,6 @@ bool SkipBoGame::validMove(char place1, char place2){
         return false;
       }
     }else{
-      cout << "illegal command, try again" << endl;
       return false;
     }
   }
@@ -234,7 +216,6 @@ bool SkipBoGame::validMove(char place1, char place2){
   else if (place1 >= '1' && place1 <= '4'){
     int index1 = place1 - '1';
     if(currentDiscard[index1].size() == 0){
-      cout << "Current Discard Pile is Empty" << endl;
       return false;
     }
     if(place2 >= 'a' && place2 <= 'd'){
@@ -257,7 +238,6 @@ bool SkipBoGame::validMove(char place1, char place2){
     int index1 = place1 -'5';
     //check if there is no card in the cooresponding position
     if(index1 > (currentHand.size()-1)){
-      cout << "No card in this place" << endl;
       return false;
     }else{
       //move to Build Pile
@@ -273,14 +253,6 @@ bool SkipBoGame::validMove(char place1, char place2){
         }
       }else if (place2 >= '1' && place2 <= '4'){//move to discard Pile
         return true;
-        // int index3 = place2 - '1';
-        // if(currentHand.getCard(index1).getValue() == 0){
-        //   return true;
-        // }else if(currentHand.getCard(index1).getValue() == currentDiscard[index3].size() + 1){
-        //   return true;
-        // }else{
-        //   return false;
-        // }
       }
     }
   }
@@ -329,10 +301,7 @@ void SkipBoGame::play(){
       display();
       while (promptPlayerMove(curp) != 2){
         cout << endl;
-        //promptPlayerMove(curp);
-        //cout << peep[curp % peep.size()].stock.size() << endl;
         display();
-        //cout << gameOver() << endl;
         if(gameOver()){
           cout << endl;
           cout << "GAME OVER - " << current.name << " wins!";
@@ -341,11 +310,9 @@ void SkipBoGame::play(){
       }
       display();
       curp ++;
-      //display();
     }else{
       cout << "illegal command, try again" << endl;
     }
-    //display();
     current = peep[curp % nump];
     cout << endl;
     cout << " >> " << current.name << " turn next" << endl;
@@ -355,39 +322,6 @@ void SkipBoGame::play(){
         mode = input.at(0);
     }
   }
-
-
-  // while (!gameOver() && mode != 's' && mode != 'q') {
-
-  //   if(mode != 'q' && mode != 's') {
-  //     while(!gameOver()) {
-  //       display();
-  //       if (promptPlayerMove(curp) == 2){
-  //         curp ++;
-  //       }else{
-  //         promptPlayerMove(curp);
-  //       }
-  //     }
-  //   }
-  // }
-    // else if(input == 's'){
-    //   string filename;
-    //   cout << "save filename:";
-    //   cin >> filename;
-    //   saveGame(filename);
-    //   return;
-    // }
-  
-
-  // if(mode == 's'){
-  //   return;
-  // }
-  // if(gameOver()) {
-  //   cout << "GAME OVER - " << current.name << " wins!" << endl;
-  //   return;
-  // }
-
-
 }
 
 
@@ -475,6 +409,13 @@ void SkipBoGame::readIn(std::istream & is) {
 }
 
 void SkipBoGame::saveGame(string filename) {
+  cout << bufferPile.size() << endl;
+  if (bufferPile.size() > 0) {
+    for (int i = bufferPile.size(); i > 0; i--) {
+      draw.insertAt(bufferPile.remove());
+    }
+  }
+  cout << bufferPile.size() << endl;
   std::ofstream savefile;
   savefile.open(filename);
   savefile << toString();
